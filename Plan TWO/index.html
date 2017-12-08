@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/demo.css" type="text/css" />
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+
+    <script type="text/javascript" src="js/awardRotate.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var rotateTimeOut = function () {
+                $('#rotateG').rotate({
+                    angle: 0,
+                    animateTo: 2160,
+                    duration: 8000,
+                    callback: function () {
+                        alert('网络超时，请检查您的网络设置！');
+                    }
+                });
+            };
+            var bRotate = false;
+            var rotateFn = function (awards, angles, txt) {
+                bRotate = !bRotate;
+                $('#rotateG').stopRotate();
+                $('#rotateG').rotate({
+                    angle: 0,
+                    animateTo: angles + 7200,
+                    duration: 5000,
+                    callback: function () {
+                        alert(txt);
+                        bRotate = !bRotate;
+                    }
+                })
+            };
+            var item=2;//控制最后显示奖项
+            $('.zhen').click(function () {
+                if (bRotate) return;
+                // var item = rnd(0, 7); 
+                switch (item) {
+                    case 0:
+                        //var angle = [26, 88, 137, 185, 235, 287, 337];
+                        rotateFn(0, 337, '未中奖');
+                        break;
+                    case 1:
+                        //var angle = [88, 137, 185, 235, 287];
+                        rotateFn(1, 26, '一等奖');
+                        break;
+                    case 2:
+                        //var angle = [137, 185, 235, 287];
+                        rotateFn(2, 88, '二等奖');
+                        break;
+                    case 3:
+                        //var angle = [137, 185, 235, 287];
+                        rotateFn(3, 137, '三等奖');
+                        break;
+                    case 4:
+                        //var angle = [185, 235, 287];
+                        rotateFn(4, 185, '四等奖');
+                        break;
+                    case 5:
+                        //var angle = [235, 287];
+                        rotateFn(5, 235, '五等奖');
+                        break;
+                    case 6:
+                        //var angle = [287];
+                        rotateFn(6, 287, '安慰奖');
+                        break;
+                }
+                console.log(item);
+            });
+            //修改ios不能自动播放
+            function audioAutoPlay(id) {
+                var audio = document.getElementById(id);
+                audio.play();
+                document.addEventListener("WeixinJSBridgeReady", function () {
+                    audio.play();
+                }, false);
+                document.addEventListener('YixinJSBridgeReady', function () {
+                    audio.play();
+                }, false);
+            }
+            audioAutoPlay('mp3');
+
+        });
+        function rnd(n, m) {
+            return Math.floor(Math.random() * (m - n + 1) + n)
+        }
+    </script>
+</head>
+<body>
+    <audio id="mp3" src="./images/Andreea Balan-Decor.mp3" autoplay="autoplay" controls="controls">
+        Your browser does not support the audio element.
+    </audio>
+    <div id="bg">
+        <img src="./images/3.jpg" alt="">
+    </div>
+    <div id="cj">
+        <div class="pan">
+            <img id="rotateG" src="./images/turntable2.png" alt="">
+            <div class="zhen">
+                    <img src="./images/pointer.png" alt="">
+            </div>
+        </div>
+        
+    </div>
+    <div id="footer">
+        <div class="rules">
+            <h2>活动规则</h2>
+            <div class="ru_info">
+                <ol>
+                    <li>抽奖时间：每日8:00-23:00</li>
+                    <li>抽奖次数: 每日一次</li>
+                    <li>没周日中奖未领取的奖品将自动清零</li>
+                    <li>活动最终解释权归水研社所有</li>
+                    <li>了解更多请关注水研社微信公众号</li>
+
+                </ol>
+            </div>
+        </div>
+        <div class="receive">
+            <h2>奖品领取</h2>
+            <div class="re_info">
+                <ol>
+                    <li>中奖后在弹出的弹框内输入姓名等个人信息</li>
+                    <li>中奖后在弹出的弹框内输入姓名等个人信息</li>
+                    <li>中奖后在弹出的弹框内输入姓名等个人信息</li>
+                    <li>中奖后在弹出的弹框内输入姓名等个人信息</li>
+                    <li>中奖后在弹出的弹框内输入姓名等个人信息</li>
+                </ol>
+            </div>
+        </div>
+        <div class="er">
+            <p>如有疑问，请关注水研社微信公众号</p>
+            <div class="erimg">
+                <img src="./images/ewm.jpg" alt="">
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
